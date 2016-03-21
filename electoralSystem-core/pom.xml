@@ -8,12 +8,12 @@
 	<parent>
 		<groupId>net.webapp</groupId>
 		<artifactId>electoralSystem</artifactId>
-		<packaging>jar</packaging>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>electoralSystem-core</artifactId>
 	<name>electoralSystem-core</name>
+	<packaging>jar</packaging>
 	<description>electoralSystem  Partie core - Metier and Data Acess Memory</description>
 	
 	<dependencies>

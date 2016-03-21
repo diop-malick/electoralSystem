@@ -20,9 +20,9 @@
 	<dependencies>
 		<!-- Subcore dependency -->
 		<dependency>
-			<groupId>${parent.groupId}</groupId>
+			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>electoralSystem-core</artifactId>
-			<version>${parent.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<!-- Spring Boot -->
 		<dependency>
