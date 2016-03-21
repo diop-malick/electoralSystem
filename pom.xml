@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>net.webapp</groupId>
+  <artifactId>electoralSystem</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Archetype - electoralSystem</name>
+  <packaging>pom</packaging>
+  <url>http://maven.apache.org</url>
+  
+  
+  <modules>
+    <module>electoralSystem-core</module>
+    <module>electoralSystem-api</module>
+    <module>electoralSystem-ui-web</module>
+    <module>electoralSystem-ui-desktop</module>
+  </modules>
+</project>
