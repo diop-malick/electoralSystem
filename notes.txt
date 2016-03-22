@@ -33,7 +33,11 @@ change elimine to status or .. / and isElimine to getElimi
 
 change primitive type to wrapper
 
-définir les niveau de log sur fihcier properties
+les cas spécfiques : 
+	egalité aux niveaux des voix
+	égalité aux niveaux des moyennes	
+
+définir les niveau de log spring sur fihcier properties
 https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-logging.html
 
 link : liste and elections / introduire le filtre Json
@@ -60,6 +64,7 @@ gérer plusieur election / chaue lection ses property / ses listes / ses résultat
 
 ajout tables résultats : au cloture des lection
 ajout status sur elections / date début / date fin
+les bureau de vote liée à une election 
 
 ajouter des graphes charts / avec spring MVC / Angualr
 

@@ -3,6 +3,7 @@ package elections.metier.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,37 +58,39 @@ public class ElectionsMetier implements IElectionsMetier {
 		return seuil;
 	}
 	
-	
+	// TODO to improve and factorise
 	// calcul des sièges obtenus
 	@Override
 	public List<ListeElectorale> calculerSieges(List<ListeElectorale> listesElectorales, ElectionsConfig election) {
 		
 		Integer totalVoix = 0; 
 		Integer nbVoixUtiles = 0;
-		double quotientElectoral;
+		Integer quotientElectoral;
 		int nbSiegesPourvus = 0;
-		double moyenneMax;
+		
 		
 		// Calcul du TOTAL DES VOIX de tous les lsite
 		// totalVoix = listesElectorales.stream().map(e -> e.getVoix()).reduce(0, (x, y) -> x + y);
 		totalVoix = listesElectorales.stream().map(e -> e.getVoix()).reduce(0, Integer::sum);
 		logger.error("totalVoix: " + totalVoix);
 		
-		// calcul des suffrages exprimés utile
+		// calcul des suffrages exprimés utiles
 		// TOTAL DES voix des listes ayant dépassés le seuil
-		// Elimine les listes n'ayant pas atteint la barre du % minimum défini
+		// On Elimine les listes n'ayant pas atteint la barre du % minimum défini
 		// on considère que tout les liste sont en course au départ : elimine à true et nbr Voix à 0
 		
 		// way 1	
-		for (int i = 0; i < listesElectorales.size() - 1 ; i++) {
-			logger.error("calcul boule : " + listesElectorales.get(i).getVoix() + "/" + (listesElectorales.get(i).getVoix()*100 / totalVoix*100)  );
-			if ((listesElectorales.get(i).getVoix() * 100 / totalVoix) < election.getSeuilElectoral() * 100) {
+		for (int i = 0; i <= (listesElectorales.size() - 1) ; i++) {
+			
+			System.out.println(listesElectorales.get(i).getVoix() + " / " + (listesElectorales.get(i).getVoix() * 100 / totalVoix));
+			System.out.println((listesElectorales.get(i).getVoix() * 100 / totalVoix) < (election.getSeuilElectoral() * 100));
+			
+			if ((listesElectorales.get(i).getVoix() * 100 / totalVoix) < (election.getSeuilElectoral() * 100)) {
 				listesElectorales.get(i).setElimine(true);
 			} else {	
 				listesElectorales.get(i).setElimine(false);
 				nbVoixUtiles += listesElectorales.get(i).getVoix();
 			}	
-		
 		}
 		logger.info("nbVoixUtiles: " + nbVoixUtiles);
 		
@@ -110,45 +113,52 @@ public class ElectionsMetier implements IElectionsMetier {
 		// on stocke les moyennes
 		List<Double> moyennesListes  = new ArrayList<>(); 
 		
-		// Premier répartition des sièges au quotient
-		for (int i = 0; i < listesElectorales.size() - 1 ; i++) {
+		// Premiere répartition des sièges au quotient
+		for (int i = 0; i <= (listesElectorales.size() - 1) ; i++) {
 			// si non eliminée
 			if ((Boolean.FALSE.equals(listesElectorales.get(i).isElimine()))) {
-				int nbrSiege = (int) (listesElectorales.get(i).getVoix() / quotientElectoral);
-				moyennesListes.add(i, (double) (listesElectorales.get(i).getVoix() / (nbrSiege + 1)));
+				int nbrSiege = listesElectorales.get(i).getVoix() / quotientElectoral;
+				moyennesListes.add(i, ((double)listesElectorales.get(i).getVoix() / (nbrSiege + 1)));
 				nbSiegesPourvus += nbrSiege; 
 				listesElectorales.get(i).setSieges(nbrSiege);
-			} else {	
-				listesElectorales.get(i).setVoix(0);
+			} 
+			// si eliminée
+			else {	
+				// listesElectorales.get(i).setVoix(0);
+				listesElectorales.get(i).setSieges(0);
 			}	
 		
 		}
-		
+				
 		// indice de la plus ofrte moyenne
 		int iMax = -1;
+		// moyenne max
+		double moyenneMax;
 		
 		// répartition des sièges restants à la plus forte moyenne
 		// 1 siège est attribué à chaque tour de boucle
-		for (int s = 0; s <  election.getNbSiegesAPourvoir() - nbSiegesPourvus ; s++) {
+		for (int iSiege = 0; iSiege <=  (election.getNbSiegesAPourvoir() - nbSiegesPourvus -1) ; iSiege++) {
 			
 			moyenneMax =  -1;
 			
 			// recherche de la liste ayant la + forte moyenne
-			for (int i = 0; i < listesElectorales.size() - 1 ; i++) {
+			for (int i = 0; i <= (listesElectorales.size() - 1) ; i++) {
 				if ((Boolean.FALSE.equals(listesElectorales.get(i).isElimine()))) {
 					if (moyennesListes.get(i) > moyenneMax) {
 						moyenneMax = moyennesListes.get(i);
-						iMax = i; // indice du la list eayant la moyenne mmax
+						iMax = i; // indice de la liste ayant la moyenne max
 					}
 				}
-			}
+			}			
 			// on attribue 1 siège à la liste de + forte moyenne
 			if (iMax != -1) {
 				int tmp = listesElectorales.get(iMax).getSieges();
-				listesElectorales.get(iMax).setSieges(tmp + 1);
-				
-				// et on change sa moyenne
-				moyennesListes.add(iMax, ( (double) (tmp / (listesElectorales.get(iMax).getSieges() + 1)) ));
+				listesElectorales.get(iMax).setSieges(tmp + 1);						
+				// et on change sa moyenne // tiem à l'index iMax
+				moyennesListes.set(iMax, ( 
+							(double) listesElectorales.get(iMax).getVoix() / (listesElectorales.get(iMax).getSieges() + 1)
+						) 
+				);
 			}
 			
 		}
