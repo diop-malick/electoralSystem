@@ -7,19 +7,42 @@ import elections.dao.entities.ListeElectorale;
 
 public interface IElectionsMetier {
 
-	// obtenir les listes en compétition
+	/**
+	 * obtenir les listes en compétition
+	 * @return
+	 */
 	public List<ListeElectorale> getListesElectorales();
 
-	// le nombre de sièges à pourvoir
+	/**
+	 * obtenir l'election
+	 * @return
+	 */
+	public ElectionsConfig getElectionsConfig();
+		
+	/**
+	 * le nombre de sièges à pourvoir
+	 * @return
+	 */
 	public int getNbSiegesAPourvoir();
 
-	// le seuil électoral
+	/**
+	 * le seuil électoral
+	 * @return
+	 */
 	public double getSeuilElectoral();
 
-	// l'enregistrement des résultats
-	public void recordResultats(List<ListeElectorale> listesElectorales);
-
-	// le calcul des sièges
+	/**
+	 * le calcul des sièges
+	 * @param listesElectorales
+	 * @param election
+	 * @return
+	 */
 	public List<ListeElectorale> calculerSieges(List<ListeElectorale> listesElectorales, ElectionsConfig election);
+	
+	/**
+	 * l'enregistrement des résultats
+	 * @param listesElectorales
+	 */
+	public void recordResultats(List<ListeElectorale> listesElectorales);
 
 }

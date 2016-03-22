@@ -27,6 +27,37 @@ public class ElectionsMetier implements IElectionsMetier {
 	@Autowired
 	private IElectionsDao electionsDao;
 
+	@Override
+	@Cacheable("electionsConfig")
+	public ElectionsConfig getElectionsConfig() {
+		return electionsDao.getElectionsConfig();
+	}	
+	
+	// nombre de sièges à pourvoir
+	@Cacheable("electionsConfig")
+	@Override
+	public int getNbSiegesAPourvoir() {
+		int nbrSiege = 0;
+		ElectionsConfig electionConfig = electionsDao.getElectionsConfig();
+		if (electionConfig != null) {
+			nbrSiege = electionConfig.getNbSiegesAPourvoir();
+		}
+		return nbrSiege;
+	}
+	
+	// seuil électoral
+	@Cacheable("electionsConfig")
+	@Override
+	public double getSeuilElectoral() {
+		double seuil = 0;
+		ElectionsConfig electionConfig = electionsDao.getElectionsConfig();
+		if (electionConfig != null) {
+			seuil = electionConfig.getSeuilElectoral();
+		}
+		return seuil;
+	}
+	
+	
 	// calcul des sièges obtenus
 	@Override
 	public List<ListeElectorale> calculerSieges(List<ListeElectorale> listesElectorales, ElectionsConfig election) {
@@ -136,28 +167,7 @@ public class ElectionsMetier implements IElectionsMetier {
 		throw new UnsupportedOperationException("[recordResultats] not yet implemented");
 	}
 
-	// nombre de sièges à pourvoir
-	@Cacheable("electionsConfig")
-	@Override
-	public int getNbSiegesAPourvoir() {
-		int nbrSiege = 0;
-		ElectionsConfig electionConfig = electionsDao.getElectionsConfig();
-		if (electionConfig != null) {
-			nbrSiege = electionConfig.getNbSiegesAPourvoir();
-		}
-		return nbrSiege;
-	}
 
-	// seuil électoral
-	@Cacheable("electionsConfig")
-	@Override
-	public double getSeuilElectoral() {
-		double seuil = 0;
-		ElectionsConfig electionConfig = electionsDao.getElectionsConfig();
-		if (electionConfig != null) {
-			seuil = electionConfig.getSeuilElectoral();
-		}
-		return seuil;
-	}
+
 
 }
