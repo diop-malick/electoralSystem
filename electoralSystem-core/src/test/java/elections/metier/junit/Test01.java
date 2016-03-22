@@ -164,6 +164,7 @@ public class Test01 {
 		}
 		// on enregistre les résultats dans la base de données
 		electionsMetier.recordResultats(listes);
+		
 		// on vérifie les résultats
 		listes = electionsMetier.getListesElectorales();
 		// on affiche les résultats

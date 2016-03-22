@@ -71,6 +71,7 @@ public class ElectionsMetier implements IElectionsMetier {
 		// Calcul du TOTAL DES VOIX de tous les lsite
 		// totalVoix = listesElectorales.stream().map(e -> e.getVoix()).reduce(0, (x, y) -> x + y);
 		totalVoix = listesElectorales.stream().map(e -> e.getVoix()).reduce(0, Integer::sum);
+		logger.error("totalVoix: " + totalVoix);
 		
 		// calcul des suffrages exprimés utile
 		// TOTAL DES voix des listes ayant dépassés le seuil
@@ -79,7 +80,8 @@ public class ElectionsMetier implements IElectionsMetier {
 		
 		// way 1	
 		for (int i = 0; i < listesElectorales.size() - 1 ; i++) {
-			if ((listesElectorales.get(i).getVoix()/totalVoix) < election.getSeuilElectoral()) {
+			logger.error("calcul boule : " + listesElectorales.get(i).getVoix() + "/" + (listesElectorales.get(i).getVoix()*100 / totalVoix*100)  );
+			if ((listesElectorales.get(i).getVoix() * 100 / totalVoix) < election.getSeuilElectoral() * 100) {
 				listesElectorales.get(i).setElimine(true);
 			} else {	
 				listesElectorales.get(i).setElimine(false);
@@ -87,6 +89,8 @@ public class ElectionsMetier implements IElectionsMetier {
 			}	
 		
 		}
+		logger.info("nbVoixUtiles: " + nbVoixUtiles);
+		
 		// way 2 - java 8
 		// listesElectorales.stream().filter(item -> ((item.getVoix()/totalVoix) < election.getSeuilElectoral())).forEach(l -> l.setElimine(true));		
 		// nbVoixUtiles =listesElectorales.stream().filter(x -> Boolean.FALSE.equals(x.isElimine())).map(e -> e.getVoix()).reduce(0, Integer::sum); 
@@ -94,13 +98,14 @@ public class ElectionsMetier implements IElectionsMetier {
 		// y-a-t-il des listes non éliminées ?
 		// si nombre vois utile = 0
 		if (nbVoixUtiles == 0) {
-			logger.error("Erreur : toutes les listes ont été éliminées");
+			logger.info("Erreur : toutes les listes ont été éliminées");
 			return null;
 		}
 		
 		
 		// Calcul le quotient Electoral : Nombre Suffrages Exprimés utiles / Nombre de siège à pourvoir
 		quotientElectoral = nbVoixUtiles / election.getNbSiegesAPourvoir();
+		logger.info("quotientElectoral: " + quotientElectoral);
 		
 		// on stocke les moyennes
 		List<Double> moyennesListes  = new ArrayList<>(); 
@@ -164,7 +169,7 @@ public class ElectionsMetier implements IElectionsMetier {
 	// sauvegarde des résultats
 	@Override
 	public void recordResultats(List<ListeElectorale> listesElectorales) {
-		throw new UnsupportedOperationException("[recordResultats] not yet implemented");
+		electionsDao.setListesElectorales(listesElectorales);
 	}
 
 
