@@ -1,5 +1,8 @@
 package elections.metier.junit;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,17 +34,20 @@ public class Test01 {
 	 */
 	@Test
 	public void calculSieges1() {
+		
 		// on crée le tableau des 7 listes candidates
-		ListeElectorale[] listes = new ListeElectorale[7];
-		listes[0] = new ListeElectorale("A", 32000, 0, false);
-		listes[1] = new ListeElectorale("B", 25000, 0, false);
-		listes[2] = new ListeElectorale("C", 16000, 0, false);
-		listes[3] = new ListeElectorale("D", 12000, 0, false);
-		listes[4] = new ListeElectorale("E", 8000, 0, false);
-		listes[5] = new ListeElectorale("F", 4500, 0, false);
-		listes[6] = new ListeElectorale("G", 2500, 0, false);
+		List<ListeElectorale> listes = new ArrayList<>();
+		listes.add(0, new ListeElectorale("A", 32000, 0, false));
+		listes.add(1, new ListeElectorale("B", 25000, 0, false));
+		listes.add(2, new ListeElectorale("C", 16000, 0, false));
+		listes.add(3, new ListeElectorale("D", 12000, 0, false));
+		listes.add(4, new ListeElectorale("E", 8000, 0, false));
+		listes.add(5, new ListeElectorale("F", 4500, 0, false));
+		listes.add(6, new ListeElectorale("G", 2500, 0, false));
+		
 		// on calcule les sièges de chacune des listes
 		listes = electionsMetier.calculerSieges(listes);
+		
 		// on vérifie les résultats
 		Assert.assertEquals(2, listes[0].getSieges());
 		Assert.assertFalse(listes[0].isElimine());

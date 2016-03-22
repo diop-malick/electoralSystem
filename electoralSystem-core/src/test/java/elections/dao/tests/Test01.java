@@ -57,9 +57,7 @@ public class Test01 {
 		System.out.println("Nombre de sièges à pourvoir : " + nbSiegesAPourvoir);
 		System.out.println("Seuil électoral : " + seuilElectoral);
 		System.out.println("Listes en compétition ---------------------");
-		for (int i = 0; i < listes.size(); i++) {
-			System.out.println(listes.get(i));
-		}
+		listes.forEach(System.out::println);
 
 		// on affecte des voix et des sièges aux listes
 		int voix = 0;
@@ -93,8 +91,6 @@ public class Test01 {
 			elimine = !elimine;
 		}
 		System.out.println("Listes en compétition ---------------------");
-		for (int i = 0; i < listes.size(); i++) {
-			System.out.println(listes.get(i));
-		}
+		listes.forEach(System.out::println);
 	}
 }

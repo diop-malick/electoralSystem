@@ -1,11 +1,14 @@
 package elections.metier.service;
 
+import java.util.List;
+
+import elections.dao.entities.ElectionsConfig;
 import elections.dao.entities.ListeElectorale;
 
 public interface IElectionsMetier {
 
 	// obtenir les listes en compétition
-	public ListeElectorale[] getListesElectorales();
+	public List<ListeElectorale> getListesElectorales();
 
 	// le nombre de sièges à pourvoir
 	public int getNbSiegesAPourvoir();
@@ -14,9 +17,9 @@ public interface IElectionsMetier {
 	public double getSeuilElectoral();
 
 	// l'enregistrement des résultats
-	public void recordResultats(ListeElectorale[] listesElectorales);
+	public void recordResultats(List<ListeElectorale> listesElectorales);
 
 	// le calcul des sièges
-	public ListeElectorale[] calculerSieges(ListeElectorale[] listesElectorales);
+	public List<ListeElectorale> calculerSieges(List<ListeElectorale> listesElectorales, ElectionsConfig election);
 
 }

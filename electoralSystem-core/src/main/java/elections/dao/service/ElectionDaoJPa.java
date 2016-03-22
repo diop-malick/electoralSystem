@@ -54,7 +54,6 @@ public class ElectionDaoJPa implements IElectionsDao {
 	public ElectionsConfig getElectionsConfig() {
 		  try {			
 			List<ElectionsConfig> result = electionsConfigRepository.findAll();
-			logger.info("ELECTION CONGI : " + result.toString());
 			Optional<ElectionsConfig> opt = result.stream().findFirst();
 			//  if(opt.isPresent()) {
 				  return opt.get();
