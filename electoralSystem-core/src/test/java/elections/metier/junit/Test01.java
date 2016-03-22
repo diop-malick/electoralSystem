@@ -120,20 +120,20 @@ public class Test01 {
 	/**
 	 * vérification 3 méthode de calcul des sièges on provoque une exception
 	 */
-	/*
+	
 	@Test(expected = ElectionsException.class)
 	public void calculSieges3() {
 		// on crée un tableau de 24 listes candidates avec chacune 1 voix
-		ListeElectorale[] listes = new ListeElectorale[25];
+		List<ListeElectorale> listes = new ArrayList<>(); // ListeElectorale[25];
 		// les 25 listes auront le même nombre de voix (4%)
-		for (int i = 0; i < listes.length; i++) {
-			listes[i] = new ListeElectorale("Liste" + (i + 1), 1, 0, false);
+		for (int i = 0; i < 24 ; i++) {
+			listes.add(new ListeElectorale("Liste" + (i + 1), 1, 0, false));
 		}
 		// calcul des sièges - normalement on doit avoir une ElectionsException
 		// avec un seuil èlectoral de 5%
 		electionsMetier.calculerSieges(listes, election);
 	}
-*/
+
 
 	/**
 	 * enregistrement des résultats de l'élection
