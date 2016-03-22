@@ -1,0 +1,68 @@
+http://tahe.developpez.com/tutoriels-cours/intro-java-spring/serge-tahe-introduction-au-langage-java-et-a-l-ecosysteme-spring/
+
+
+
+
+Le problème a résoudre
+==========================================
+Elle demandera les renseignements suivants à l'utilisateur :
+- nombre de sièges à pourvoir
+- nombre de listes en compétition
+- pour chaque liste : son nom, son nombre de voix
+
+Avec ces renseignements, l'application calcule les sièges obtenus par chacune des listes et les affiche.
+
+Elimine les listes n'ayant pas atteint la barre du % minimum défini
+
+
+
+
+
+TODO
+========================================
+
+
+algorithme : 
+	use map may be more easiest
+
+code in english
+
+recupération seuil and siege : reunir dans une mêm fonction
+
+change elimine to status or .. / and isElimine to getElimi
+
+change primitive type to wrapper
+
+définir les niveau de log sur fihcier properties
+https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-logging.html
+
+link : liste and elections / introduire le filtre Json
+
+vire les tableaus 
+
+use : classe exceptions, enum, ClasseTest
+
+change crudreposiroty to jpareposiroty
+
+USE JAVA 8 / Stream sur les list / Sort /
+delete : List.newArrayList() by source.forEach(target::add)
+delete guava of all projet
+
+add bean validation
+add client side validation / JQUERY
+
+Gestion de plusieurs département
+Répartition des résusltats par département : sur carte interracif
+Classement par département/Région/pays
+
+Appliquer aux elections légistative Française
+gérer plusieur election / chaue lection ses property / ses listes / ses résultats
+
+ajout tables résultats : au cloture des lection
+ajout status sur elections / date début / date fin
+
+ajouter des graphes charts / avec spring MVC / Angualr
+
+
+
+
