@@ -66,5 +66,6 @@ les bureau de vote liée à une election
 ajouter des graphes charts / avec spring MVC / Angualr
 
 
-
-
+virer maven surfire : 
+utilisé pour <!-- pour l'installation de l'artifact du projet dans le dépôt local Maven -->
+check maven-assembly-plugin ???

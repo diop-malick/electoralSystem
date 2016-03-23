@@ -14,7 +14,7 @@
 	<artifactId>electoralSystem-ui-desktop</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Archetype - electoralSystem-ui-desktop</name>
+	<name>Swing electoralSystem-ui-desktop</name>
 	<description>Submodule front appli desktop </description>
 
 	<dependencies>
@@ -43,7 +43,7 @@
 		</dependency>
 	</dependencies>
 	
-		<!-- plugins -->
+	<!-- plugins -->
 	<build>
 		<plugins>
 			<plugin>
