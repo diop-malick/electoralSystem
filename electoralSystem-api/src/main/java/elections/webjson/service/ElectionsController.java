@@ -109,13 +109,14 @@ public class ElectionsController {
 	 * @return
 	 * @throws JsonProcessingException
 	 */
+	// TODO replace dto by lection linked with list
 	@RequestMapping(value = "/calculerSieges", method = RequestMethod.POST, consumes = "application/json; charset=UTF-8", produces = "application/json; charset=UTF-8")
-	public Response<List<ListeElectorale>> calculerSieges(@RequestBody List<ListeElectorale> listes, @RequestBody ElectionsConfig election)
+	public Response<List<ListeElectorale>> calculerSieges(@RequestBody CalculerSiegesDto calculerSiegesDto)
 			throws JsonProcessingException {
 		// réponse
 		Response<List<ListeElectorale>> response;
 		try {
-			response = new Response<>(0, null, metier.calculerSieges(listes, election));
+			response = new Response<>(0, null, metier.calculerSieges(calculerSiegesDto.getListes(), calculerSiegesDto.getElection()));
 		} catch (ElectionsException e1) {
 			response = new Response<>(1003, e1.getErreurs(), null);
 		} catch (Exception e2) {
