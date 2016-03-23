@@ -39,7 +39,7 @@ public class ElectionsMetier implements IElectionsMetier {
 	@Override
 	public int getNbSiegesAPourvoir() {
 		int nbrSiege = 0;
-		ElectionsConfig electionConfig = electionsDao.getElectionsConfig();
+		ElectionsConfig electionConfig = getElectionsConfig();
 		if (electionConfig != null) {
 			nbrSiege = electionConfig.getNbSiegesAPourvoir();
 		}
@@ -51,7 +51,7 @@ public class ElectionsMetier implements IElectionsMetier {
 	@Override
 	public double getSeuilElectoral() {
 		double seuil = 0;
-		ElectionsConfig electionConfig = electionsDao.getElectionsConfig();
+		ElectionsConfig electionConfig = getElectionsConfig();
 		if (electionConfig != null) {
 			seuil = electionConfig.getSeuilElectoral();
 		}

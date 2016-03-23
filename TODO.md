@@ -39,10 +39,13 @@ Elimine les listes n'ayant pas atteint la barre du % minimum défini
 
 
 # module CORE
-	link : liste and elections 
-	vire les tableaus 
-	change crudreposiroty to jpareposiroty
+	* link : liste and elections 
+	* get out tableaux, use list
+	* change crudreposiroty to jpareposiroty
 
+# module UI DESKTOP :
+	* à terminer 
+	* simplifier le client RESTTmplate : s'inspirer de Mcdo-ws
 
 
 USE JAVA 8 / Stream sur les list / Sort /
@@ -69,3 +72,16 @@ ajouter des graphes charts / avec spring MVC / Angualr
 virer maven surfire : 
 utilisé pour <!-- pour l'installation de l'artifact du projet dans le dépôt local Maven -->
 check maven-assembly-plugin ???
+
+# wording : 
+résultat
+nombre d'inscrits
+xxx votants
+xxx Bulletins nuls
+xxx suffrage valablement exprimés
+
+liste A : x % des votants
+
+x % taux de participation
+
+
