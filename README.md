@@ -1,6 +1,6 @@
-# electoral systems Application for Proportional representation
+# Electoral systems Application for Proportional representation
 
-Application de caclcul de résultats d'élections/Scrutin proportionnel plurinominal
+Application de caclcul de résultats d'élections/Scrutin proportionnel plurinominal.
 
 # Architecture
 

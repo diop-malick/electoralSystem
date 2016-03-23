@@ -1,9 +1,5 @@
-http://tahe.developpez.com/tutoriels-cours/intro-java-spring/serge-tahe-introduction-au-langage-java-et-a-l-ecosysteme-spring/
+# Le problème a résoudre
 
-
-
-
-Le problème a résoudre
 ==========================================
 Elle demandera les renseignements suivants à l'utilisateur :
 - nombre de sièges à pourvoir
@@ -15,41 +11,39 @@ Avec ces renseignements, l'application calcule les sièges obtenus par chacune de
 Elimine les listes n'ayant pas atteint la barre du % minimum défini
 
 
+# TODO LIST
 
 
-
-TODO
-========================================
-
-API : 
+# module API : 
 	virer le mapping JOSN qui est fait automatiquement si on renvoi les entités
 	faile le mapping si on renvois un reponse autre
 
-algorithme : 
+
+# L'algorithme : 
 	use map may be more easiest
+	
 
-code in english
+# code 
+	* variable, comment and method in english
+	* recupération seuil and siege : reunir dans une mêm fonction
+	* change elimine to status or .. / and isElimine to getElimi
+	* change primitive type to wrapper
+	* définir les niveau de log spring sur fihcier properties
+	https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-logging.html
+	* use : classe exceptions, enum, ClasseTest
 
-recupération seuil and siege : reunir dans une mêm fonction
-
-change elimine to status or .. / and isElimine to getElimi
-
-change primitive type to wrapper
-
-les cas spécfiques : 
+# les cas spécfiques a gérer : 
 	egalité aux niveaux des voix
 	égalité aux niveaux des moyennes	
 
-définir les niveau de log spring sur fihcier properties
-https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-logging.html
 
-link : liste and elections / introduire le filtre Json
 
-vire les tableaus 
+# module CORE
+	link : liste and elections 
+	vire les tableaus 
+	change crudreposiroty to jpareposiroty
 
-use : classe exceptions, enum, ClasseTest
 
-change crudreposiroty to jpareposiroty
 
 USE JAVA 8 / Stream sur les list / Sort /
 delete : List.newArrayList() by source.forEach(target::add)
