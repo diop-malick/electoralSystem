@@ -22,15 +22,19 @@ import elections.dao.config.AppConfig;
 @ComponentScan({ "elections.webjson.service" })
 public class WebConfig {
 	// -------------------------------- configuration couche [web]
+	
+	// injection du contexte spring 
 	@Autowired
 	private ApplicationContext context;
 
+	// définition de la servlet
 	@Bean
 	public DispatcherServlet dispatcherServlet() {
 		DispatcherServlet servlet = new DispatcherServlet((WebApplicationContext) context);
 		return servlet;
 	}
 
+	// le servlet traite tous les URL
 	@Bean
 	public ServletRegistrationBean servletRegistrationBean(DispatcherServlet dispatcherServlet) {
 		return new ServletRegistrationBean(dispatcherServlet, "/*");
