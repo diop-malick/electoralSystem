@@ -18,12 +18,27 @@
 	<description>Submodule front appli desktop </description>
 
 	<dependencies>
-		<!-- Subcore dependency -->
+		<!-- Spring -->
+		<!--  amène avec elle la classe [RestTemplate] qui permet de s'interfacer aisément avec une application web / jSON  -->
 		<dependency>
-			<groupId>${project.parent.groupId}</groupId>
-			<artifactId>electoralSystem-core</artifactId>
-			<version>${project.parent.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
 		</dependency>
+		<!-- librairie jSON utilisée par Spring -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<!-- composant utilisé par Spring RestTemplate : va nous permettre de fixer un timeout aux requêtes HTTP du client. -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+		
 		<!-- Spring Boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -36,6 +51,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 		<!-- bibliothèque de logs -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
