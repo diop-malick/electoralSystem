@@ -1,8 +1,8 @@
-package spring.cors.client.boot;
+package elections.client.cors.boot;
 
 import org.springframework.boot.SpringApplication;
 
-import spring.cors.client.config.WebConfig;
+import elections.client.cors.config.WebConfig;
 
 public class Boot {
 

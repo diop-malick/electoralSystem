@@ -1,4 +1,4 @@
-package spring.cors.client.config;
+package elections.client.cors.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
