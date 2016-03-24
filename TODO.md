@@ -12,15 +12,16 @@ Elimine les listes n'ayant pas atteint la barre du % minimum défini
 
 
 # TODO LIST
-
+	* Implement les accées CORS inter domaine
+	* Implement Ui web layer
 
 # module API : 
-	virer le mapping JOSN qui est fait automatiquement si on renvoi les entités
-	faile le mapping si on renvois un reponse autre
+	* virer le mapping JOSN qui est fait automatiquement si on renvoi les entités
+	* faile le mapping si on renvois un reponse autre
 
 
 # L'algorithme : 
-	use map may be more easiest
+	* use map may be more easiest
 	
 
 # code 
