@@ -11,8 +11,9 @@
 	</parent>
 
 	<artifactId>electoralSystem-api</artifactId>
-	<packaging>war</packaging>
-
+	<packaging>jar</packaging>
+<!-- 	<packaging>jar</packaging> -->
+	
 	<name>electoralSystem-api</name>
 	<description>Submodule API Wesb Service</description>
 
@@ -28,6 +29,20 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
+		<!-- couche Security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+<!-- 		pour déploiyer sur tomcat -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter-tomcat</artifactId> -->
+<!-- 			<scope>provided</scope> -->
+<!-- 		</dependency> -->
+		
 		
 <!-- 		<dependency> -->
 <!-- 			<groupId>org.springframework.boot</groupId> -->
@@ -51,9 +66,17 @@
 
 	<build>
 		<plugins>
+		<!--  maven plugin qui génére l'artefact (archive) jar du projet
+		L'artifact ainsi généré va dans le dépôt Maven local
+		-->
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 				<artifactId>maven-surefire-plugin</artifactId> -->
+<!-- 			</plugin> -->
+			<!--  boot maven plugin , génére l'archive jar exécutable avec boot -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
