@@ -44,7 +44,7 @@ Elimine les listes n'ayant pas atteint la barre du % minimum défini
 	* change crudreposiroty to jpareposiroty
 
 # module UI DESKTOP :
-	* à terminer 
+	* à terminer : initaliser liste / Jcombo  
 	* simplifier le client RESTTmplate : s'inspirer de Mcdo-ws
 
 
