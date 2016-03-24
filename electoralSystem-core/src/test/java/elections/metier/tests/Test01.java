@@ -1,4 +1,4 @@
-package elections.metier.junit;
+package elections.metier.tests;
 
 import java.util.ArrayList;
 import java.util.List;

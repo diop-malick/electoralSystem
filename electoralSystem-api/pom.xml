@@ -49,12 +49,18 @@
 <!-- 			<artifactId>spring-boot-starter</artifactId> -->
 <!-- 		</dependency> -->
 		
+		<!-- Spring Boot Test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<!-- Spring Boot -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.boot</groupId> -->
-<!-- 			<artifactId>spring-boot</artifactId> -->
-<!-- 			<scope>test</scope> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 		<!-- bibliothèque de logs -->
 		<dependency>
