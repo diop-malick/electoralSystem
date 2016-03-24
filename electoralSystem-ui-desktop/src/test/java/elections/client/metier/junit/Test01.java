@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ import elections.client.config.MetierConfig;
 import elections.client.entities.ElectionsConfig;
 import elections.client.entities.ElectionsException;
 import elections.client.entities.ListeElectorale;
+import elections.client.entities.User;
 import elections.client.metier.IElectionsMetier;
 
 @SpringApplicationConfiguration(classes = MetierConfig.class)
@@ -31,30 +33,80 @@ public class Test01 {
 
 	// couche [DAO]
 	@Autowired
-	private IElectionsMetier electionsMetier;
-
+	private static IElectionsMetier electionsMetier;
+	
 	// mappeur jSON
-	private ObjectMapper mapper = new ObjectMapper();
+	private static ObjectMapper mapper = new ObjectMapper();
 
-	private ElectionsConfig election;
+	private static ElectionsConfig election;
+	
+	private User myAdmin = new User("admin", "admin");
 
+	// utilisateurs
+		static private User admin;
+		static private User user;
+		static private User unknown;
+		
+	
+	@BeforeClass
+	public static void initTest() throws JsonProcessingException {
+			admin = new User("admin", "admin");
+			user = new User("user", "user");
+			unknown = new User("x", "y");
+			
+			
+			/* Get existing election*/
+			election = electionsMetier.getElectionsConfig(user);
+			System.out.println("Election : " + mapper.writeValueAsString(election));
+	}
+		
 	@Before
-	public void setUp() throws Exception {
-		
-		/* Get existing election*/
-		election = electionsMetier.getElectionsConfig();
-		System.out.println("Election : " + mapper.writeValueAsString(election));
-		
+	public void setUp() throws Exception {				
 		/* initialise new election */
 		// election = new ElectionsConfig();
 		// election.setNbSiegesAPourvoir(6);
 		// election.setSeuilElectoral(0.05);
 	}
-
 	@After
 	public void tearDown() {
 	}
 
+	
+	@Test()
+	public void checkUserUser() {
+		ElectionsException se = null;
+		try {
+			electionsMetier.authenticate(user);
+		} catch (ElectionsException e) {
+			se = e;
+		}
+		Assert.assertNotNull(se);
+		Assert.assertEquals("403 Forbidden", se.getErreurs().get(0));
+	}
+	
+	@Test()
+	public void checkUserUnknown() {
+		ElectionsException se = null;
+		try {
+			electionsMetier.authenticate(unknown);
+		} catch (ElectionsException e) {
+			se = e;
+		}
+		Assert.assertNotNull(se);
+		Assert.assertEquals("401 Unauthorized", se.getErreurs().get(0));
+	}
+
+	@Test()
+	public void checkUserAdmin() {
+		ElectionsException se = null;
+		try {
+			electionsMetier.authenticate(admin);
+		} catch (ElectionsException e) {
+			se = e;
+		}
+		Assert.assertNull(se);
+	}
+	
 	/**
 	 * vérification 1 : méthode de calcul des sièges on fixe en dur les listes
 	 * 
@@ -75,7 +127,7 @@ public class Test01 {
 		listes.add(6, new ListeElectorale("G", 2500, 0, false));
 
 		// on calcule les sièges de chacune des listes
-		listes = electionsMetier.calculerSieges(listes, election);
+		listes = electionsMetier.calculerSieges(admin, listes, election);
 
 		// on affiche les résultats
 		displayJsonResult(listes);
@@ -92,7 +144,7 @@ public class Test01 {
 	public void calculSieges2() throws JsonProcessingException {
 
 		// on crée le tableau des 7 listes candidates
-		List<ListeElectorale> listes = electionsMetier.getListesElectorales();
+		List<ListeElectorale> listes = electionsMetier.getListesElectorales(admin);
 
 		// on fixe en dur les voix
 		listes.get(0).setVoix(32000);
@@ -104,7 +156,7 @@ public class Test01 {
 		listes.get(6).setVoix(2500);
 
 		// on calcule les sièges obtenus par chacune des listes
-		listes = electionsMetier.calculerSieges(listes, election);
+		listes = electionsMetier.calculerSieges(admin, listes, election);
 		
 		// on affiche les résultats
 		displayJsonResult(listes);
@@ -125,7 +177,7 @@ public class Test01 {
 		}
 		// calcul des sièges - normalement on doit avoir une ElectionsException
 		// avec un seuil èlectoral de 5%
-		electionsMetier.calculerSieges(listes, election);
+		electionsMetier.calculerSieges(admin, listes, election);
 	}
 
 	/**
@@ -138,7 +190,7 @@ public class Test01 {
 	public void ecritureResultatsElections() throws JsonProcessingException {
 
 		// listes des candidates
-		List<ListeElectorale> listes = electionsMetier.getListesElectorales();
+		List<ListeElectorale> listes = electionsMetier.getListesElectorales(admin);
 
 		// on fixe en dur les voix
 		listes.get(0).setVoix(32000);
@@ -152,14 +204,14 @@ public class Test01 {
 		logger.info("ELECTION : " + mapper.writeValueAsString(election));
 
 		// on calcule les sièges obtenus par chacune des listes
-		listes = electionsMetier.calculerSieges(listes, election);
+		listes = electionsMetier.calculerSieges(admin, listes, election);
 		// on affiche les résultats
 		displayJsonResult(listes);
 		// on enregistre les résultats dans la base de données
-		electionsMetier.recordResultats(listes);
+		electionsMetier.recordResultats(admin ,listes);
 
 		// on vérifie les résultats
-		listes = electionsMetier.getListesElectorales();
+		listes = electionsMetier.getListesElectorales(admin);
 		// on affiche les résultats
 		for (int i = 0; i < listes.size(); i++) {
 			System.out.println(mapper.writeValueAsString(listes.get(i)));

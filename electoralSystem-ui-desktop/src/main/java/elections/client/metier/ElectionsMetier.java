@@ -17,6 +17,8 @@ import elections.client.entities.CalculerSiegesDto;
 import elections.client.entities.ElectionsConfig;
 import elections.client.entities.ElectionsException;
 import elections.client.entities.ListeElectorale;
+import elections.client.entities.User;
+
 import java.io.IOException;
 
 @Component
@@ -34,49 +36,54 @@ public class ElectionsMetier implements IElectionsMetier {
 	@Autowired
 	private ObjectMapper jsonMapper;
 	
-	@PostConstruct
-	public void init() {
-		// mappeurs jSON
-		ObjectMapper mapperResponse = context.getBean(ObjectMapper.class);
-		try {
-			// requête
-			Response<ElectionsConfig> response = mapperResponse.readValue(
-					dao.getResponse("/getElectionsConfig", null), new TypeReference<Response<ElectionsConfig>>() {});
-			// erreur ?
-			if (response.getStatus() != 0) {
-				// on lance 1 exception
-				throw new ElectionsException(response.getStatus(), response.getMessages());
-			} else {
-				electionsConfig = response.getBody();
+	
+	public ElectionsConfig getElectionsConfig(User user) {
+			if (electionsConfig != null) {
+				return electionsConfig;
 			}
-		} catch (ElectionsException e1) {
-			throw e1;
-		} catch (IOException | RuntimeException e2) {
-			throw new ElectionsException(100, getMessagesForException(e2));
+			try {
+				// requête
+				Response<ElectionsConfig> response = jsonMapper.readValue(
+						dao.getResponse(user, "/getElectionsConfig", null), new TypeReference<Response<ElectionsConfig>>() {
+						});
+				// erreur ?
+				if (response.getStatus() != 0) {
+					// on lance 1 exception
+					throw new ElectionsException(response.getStatus(), response.getMessages());
+				} else {
+					electionsConfig = response.getBody();
+					return electionsConfig;
+				}
+			} catch (ElectionsException e1) {
+				throw e1;
+			} catch (IOException | RuntimeException e2) {
+				throw new ElectionsException(100, e2);
+			}
 		}
+		
+	
+	@Override
+	public void authenticate(User user) {
+		dao.getResponse( user, "/authenticate", null);	
 	}
 
-	// obtenir les listes en compétition
-	public ElectionsConfig getElectionsConfig() {
-		return electionsConfig;
-	};
 		
 	@Override
-	public int getNbSiegesAPourvoir() {
+	public int getNbSiegesAPourvoir(User user) {
 		return electionsConfig.getNbSiegesAPourvoir();
 	}
 
 	@Override
-	public double getSeuilElectoral() {
+	public double getSeuilElectoral(User user) {
 		return electionsConfig.getSeuilElectoral();
 	}
 	
 	@Override
-	public List<ListeElectorale> getListesElectorales() {
+	public List<ListeElectorale> getListesElectorales(User user) {
 		try {
 			// requête
 			Response<List<ListeElectorale>> response = jsonMapper.readValue(
-					dao.getResponse("/getListesElectorales", null), new TypeReference<Response<List<ListeElectorale>>>() {});
+					dao.getResponse(user, "/getListesElectorales", null), new TypeReference<Response<List<ListeElectorale>>>() {});
 			// erreur ?
 			if (response.getStatus() != 0) {
 				throw new ElectionsException(response.getStatus(), response.getMessages());
@@ -91,11 +98,11 @@ public class ElectionsMetier implements IElectionsMetier {
 	}
 
 	@Override
-	public Void recordResultats(List<ListeElectorale> listesElectorales) { 
+	public Void recordResultats(User user, List<ListeElectorale> listesElectorales) { 
 		try {
 			// requête
 			Response<Void> response = jsonMapper.readValue(
-					dao.getResponse("/setListesElectorales", jsonMapper.writeValueAsString(listesElectorales)), 
+					dao.getResponse(user, "/setListesElectorales", jsonMapper.writeValueAsString(listesElectorales)), 
 					new TypeReference<Response<Void>>() {}
 			);
 			// erreur ?
@@ -112,12 +119,12 @@ public class ElectionsMetier implements IElectionsMetier {
 	}
 
 	@Override
-	public List<ListeElectorale> calculerSieges(List<ListeElectorale> listesElectorales, ElectionsConfig election) {
+	public List<ListeElectorale> calculerSieges(User user, List<ListeElectorale> listesElectorales, ElectionsConfig election) {
 		try {
 			CalculerSiegesDto calculerSiegesDto = new CalculerSiegesDto(election, listesElectorales);
 			// requête
 			Response<List<ListeElectorale>> response = jsonMapper.readValue(
-					dao.getResponse("/calculerSieges", jsonMapper.writeValueAsString(calculerSiegesDto)), 
+					dao.getResponse(user, "/calculerSieges", jsonMapper.writeValueAsString(calculerSiegesDto)), 
 					new TypeReference<Response<List<ListeElectorale>>>() {}
 			);
 			// erreur ?
@@ -152,4 +159,6 @@ public class ElectionsMetier implements IElectionsMetier {
 		}
 		return erreurs;
 	}
+
+
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import elections.client.entities.ElectionsConfig;
 import elections.client.entities.ElectionsException;
 import elections.client.entities.ListeElectorale;
+import elections.client.entities.User;
 import elections.client.metier.IElectionsMetier;
 
 /**
@@ -43,18 +44,21 @@ public class ElectionsSwing extends AbstractElectionsSwing implements IElections
 	// listes saisies par l'utilisateur
 	private final List<ListeElectorale> listesSaisies = new ArrayList<>();
 	private List<ListeElectorale> tListesSaisies;
+	
+	@Autowired
+	private User user;
 
 	// initialisations
 	@Override
 	protected void init() {
 		
-		election = metier.getElectionsConfig(); 
+		election = metier.getElectionsConfig(user); 
 				
 		// génération des composants par la classe parent
 		super.init();
 		
 		// on demande les listes à la couche [metier]
-		listes = metier.getListesElectorales();
+		listes = metier.getListesElectorales(user);
 		
 		// on associe les noms des listes au combo jComboBoxNomsListes
 		// jComboBoxNomsListes.
@@ -102,7 +106,7 @@ public class ElectionsSwing extends AbstractElectionsSwing implements IElections
 
 	@Override
 	protected void doCalculer() {
-		listes = metier.calculerSieges(listes, election);
+		listes = metier.calculerSieges(user, listes, election);
 	}
 
 	@Override
