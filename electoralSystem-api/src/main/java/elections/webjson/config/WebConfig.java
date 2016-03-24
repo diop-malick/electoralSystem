@@ -18,7 +18,7 @@ import elections.dao.config.AppConfig;
 
 
 @EnableWebMvc
-@Import({ AppConfig.class })
+@Import({ AppConfig.class, SecurityConfig.class })
 @ComponentScan({ "elections.webjson.service" })
 public class WebConfig {
 	// -------------------------------- configuration couche [web]

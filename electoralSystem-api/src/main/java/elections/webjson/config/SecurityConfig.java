@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import elections.security.dao.AppUserDetailsService;
 @EnableWebSecurity
-@ComponentScan(basePackages = { "elections.security.service" })
+//@ComponentScan(basePackages = { "elections.security.service" })
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired

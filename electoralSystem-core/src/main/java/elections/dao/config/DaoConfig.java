@@ -14,8 +14,8 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
-@ComponentScan(basePackages = { "elections.dao.service" })
-@EnableJpaRepositories(basePackages = { "elections.dao.repositories" })
+@ComponentScan(basePackages = { "elections.dao.service", "elections.security.dao" })
+@EnableJpaRepositories(basePackages = { "elections.dao.repositories", "elections.security.repositories" })
 @Configuration
 public class DaoConfig {
 
@@ -24,7 +24,7 @@ public class DaoConfig {
 	final private static String USER = "admin";
 	final private static String PASSWD = "admin";
 	final private static String DRIVER_CLASSNAME = "com.mysql.jdbc.Driver";
-	final static private String[] ENTITIES_PACKAGES = { "elections.dao.entities" };
+	final static private String[] ENTITIES_PACKAGES = { "elections.dao.entities" , "elections.security.entities" };
 
 	// Datasource : définit la source de données
 	// la source de données [tomcat-jdbc]

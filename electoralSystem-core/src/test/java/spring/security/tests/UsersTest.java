@@ -15,16 +15,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 
-import elections.dao.config.DaoConfig;
+import elections.dao.config.AppConfig;
 import elections.security.dao.AppUserDetails;
 import elections.security.dao.AppUserDetailsService;
 import elections.security.entities.Role;
 import elections.security.entities.User;
 import elections.security.repositories.UserRepository;
 
-
-
-@SpringApplicationConfiguration(classes = DaoConfig.class)
+@SpringApplicationConfiguration(classes = AppConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UsersTest {
 
