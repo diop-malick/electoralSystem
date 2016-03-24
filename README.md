@@ -6,10 +6,10 @@ Application de caclcul de résultats d'élections/Scrutin proportionnel plurinom
 
 Client / serveur -> 4 Modules  :
 
-	net.webapp.electoralSystem-core			(dao, métier)
+	net.webapp.electoralSystem-core			(DAO, métier)
 	net.webapp.electoralSystem-api			(REST web service)
-	net.webapp.electoralSystem-ui-web		(front web Sprng MVC)
-	net.webapp.electoralSystem-ui-desktop		(front Desktop Swing)
+	net.webapp.electoralSystem-ui-web		(front web Spring MVC & thymeleaf)
+	net.webapp.electoralSystem-ui-desktop	 (front Desktop Swing - Client Web pour le web service)
 	
 # Stack Technique
 
