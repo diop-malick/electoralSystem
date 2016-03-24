@@ -24,7 +24,8 @@
 		<module>electoralSystem-core</module>
 		<module>electoralSystem-api</module>
 		<module>electoralSystem-ui-web</module>
-		<module>electoralSystem-ui-desktop</module>
+		<module>electoralSystem-ui-client-desktop</module>
+		<module>electoralSystem-ui-client-cors</module>
 	</modules>
 	
 	<!-- PROPERTIES -->

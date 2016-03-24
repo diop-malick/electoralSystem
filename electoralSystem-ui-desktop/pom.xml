@@ -11,11 +11,11 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>electoralSystem-ui-desktop</artifactId>
+	<artifactId>electoralSystem-ui-client-desktop</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Swing electoralSystem-ui-desktop</name>
-	<description>Submodule front appli desktop </description>
+	<name>electoralSystem-ui-client-desktop</name>
+	<description>appli client desktop avec Swing et Spring RestTemplate </description>
 
 	<dependencies>
 		<!-- Spring -->
