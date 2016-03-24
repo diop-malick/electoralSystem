@@ -82,9 +82,6 @@ public class ElectionsMetier implements IElectionsMetier {
 		// way 1	
 		for (int i = 0; i <= (listesElectorales.size() - 1) ; i++) {
 			
-			System.out.println(listesElectorales.get(i).getVoix() + " / " + (listesElectorales.get(i).getVoix() * 100 / totalVoix));
-			System.out.println((listesElectorales.get(i).getVoix() * 100 / totalVoix) < (election.getSeuilElectoral() * 100));
-			
 			if ((listesElectorales.get(i).getVoix() * 100 / totalVoix) < (election.getSeuilElectoral() * 100)) {
 				listesElectorales.get(i).setElimine(true);
 			} else {	
@@ -124,10 +121,8 @@ public class ElectionsMetier implements IElectionsMetier {
 			} 
 			// si eliminée
 			else {	
-				// listesElectorales.get(i).setVoix(0);
 				listesElectorales.get(i).setSieges(0);
-			}	
-		
+			}			
 		}
 				
 		// indice de la plus ofrte moyenne
@@ -139,8 +134,7 @@ public class ElectionsMetier implements IElectionsMetier {
 		// 1 siège est attribué à chaque tour de boucle
 		for (int iSiege = 0; iSiege <=  (election.getNbSiegesAPourvoir() - nbSiegesPourvus -1) ; iSiege++) {
 			
-			moyenneMax =  -1;
-			
+			moyenneMax =  -1;			
 			// recherche de la liste ayant la + forte moyenne
 			for (int i = 0; i <= (listesElectorales.size() - 1) ; i++) {
 				if ((Boolean.FALSE.equals(listesElectorales.get(i).isElimine()))) {
@@ -155,19 +149,13 @@ public class ElectionsMetier implements IElectionsMetier {
 				int tmp = listesElectorales.get(iMax).getSieges();
 				listesElectorales.get(iMax).setSieges(tmp + 1);						
 				// et on change sa moyenne // tiem à l'index iMax
-				moyennesListes.set(iMax, ( 
-							(double) listesElectorales.get(iMax).getVoix() / (listesElectorales.get(iMax).getSieges() + 1)
-						) 
-				);
+				moyennesListes.set(iMax, ( (double) listesElectorales.get(iMax).getVoix() / (listesElectorales.get(iMax).getSieges() + 1)) );
 			}
 			
 		}
-		
-		
-		/**	Classement Final sans tri */
-		
-		return listesElectorales;
-		
+				
+		/**	Classement Final sans tri */		
+		return listesElectorales;		
 	}
 
 	// listes en compétition
