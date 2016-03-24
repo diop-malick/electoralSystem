@@ -1,8 +1,8 @@
-package elections.dao.repositories.security;
+package elections.security.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 
-import elections.dao.entities.security.Role;
+import elections.security.entities.Role;
 
 public interface RoleRepository extends CrudRepository<Role, Long> {
 

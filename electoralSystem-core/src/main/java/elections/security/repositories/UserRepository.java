@@ -1,11 +1,10 @@
-package elections.dao.repositories.security;
+package elections.security.repositories;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import elections.dao.entities.security.Role;
-import elections.dao.entities.security.User;
-
+import elections.security.entities.Role;
+import elections.security.entities.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 

@@ -1,4 +1,4 @@
-package elections.dao.entities.security;
+package elections.security.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
