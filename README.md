@@ -34,4 +34,8 @@ Client / serveur -> 4 Modules  :
 
 * http://tahe.developpez.com/tutoriels-cours/intro-java-spring/serge-tahe-introduction-au-langage-java-et-a-l-ecosysteme-spring/
 * https://onedrive.live.com/?authkey=%21APlXAeatN_9zGO4&id=f53a919f43d27eb5%2125280&cid=F53A919F43D27EB5
+
+# accée :
+
+ui-client-cors	:  localhost:8081/client.html
 	

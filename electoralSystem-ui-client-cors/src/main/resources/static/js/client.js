@@ -9,7 +9,7 @@ var password;
 var authorizationHeader;
 
 function requestServer() {
-	// on récupère les informations
+	// on récupère les informations du formulaire 
 	var urlValue = url.val();
 	var postedValue = posted.val();
 	var identifiantValue = identifiant.val();
@@ -27,7 +27,8 @@ function requestServer() {
 }
 
 function doGet(url) {
-	// on fait un appel Ajax à la main
+	// on fait un appel Ajax manuel
+	console.log("test");
 	$.ajax({
 		headers : {
 			'Authorization':'Basic '+authorizationCode

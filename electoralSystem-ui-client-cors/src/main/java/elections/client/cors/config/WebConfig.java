@@ -32,12 +32,15 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public EmbeddedServletContainerFactory embeddedServletContainerFactory() {
+		// le service web fonctionnera sur le port 8081
 		return new TomcatEmbeddedServletContainerFactory("", 8081);
 	}
 
+	// permet de définir des ressources statiques, ç-à-d des ressources non traitées par la [DispatcherServlet] 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/*.html").addResourceLocations("classpath:/static/");
 		registry.addResourceHandler("/*.js").addResourceLocations("classpath:/static/js/");
+		registry.addResourceHandler("/*.css").addResourceLocations("classpath:/static/css/");
 	}
 }
