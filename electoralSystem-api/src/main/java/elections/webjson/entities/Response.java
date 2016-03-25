@@ -1,4 +1,4 @@
-package elections.webjson.service;
+package elections.webjson.entities;
 
 import java.util.List;
 

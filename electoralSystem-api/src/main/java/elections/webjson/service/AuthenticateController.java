@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import elections.webjson.service.Response;
+import elections.webjson.entities.Response;
+
 
 @Controller
 public class AuthenticateController {

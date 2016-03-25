@@ -15,6 +15,8 @@ import elections.dao.entities.ElectionsConfig;
 import elections.dao.entities.ElectionsException;
 import elections.dao.entities.ListeElectorale;
 import elections.metier.service.IElectionsMetier;
+import elections.webjson.entities.CalculerSiegesDto;
+import elections.webjson.entities.Response;
 
 @RestController
 public class ElectionsController {
