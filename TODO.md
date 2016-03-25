@@ -14,6 +14,10 @@ Elimine les listes n'ayant pas atteint la barre du % minimum défini
 # TODO LIST
 	* Implement les accées CORS inter domaine
 	* Implement Ui web layer
+	
+	* json conversion
+don’t need to do this conversion manually. Because Jackson is on the classpath, Spring’s MappingJackson2HttpMessageConverter is automatically chosen to convert the Greeting instance to JSON. 
+		
 
 # module API : 
 	* virer le mapping JOSN qui est fait automatiquement si on renvoi les entités

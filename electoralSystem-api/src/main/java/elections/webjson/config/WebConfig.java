@@ -16,21 +16,29 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import elections.dao.config.AppConfig;
 
-
+/**
+ * configuration couche [web]
+ * 
+ * @author Malick
+ *
+ */
 @EnableWebMvc
-@Import({ AppConfig.class, SecurityConfig.class })
+@Import({ AppConfig.class, SecurityConfig.class, CorsConfig.class })
 @ComponentScan({ "elections.webjson.service" })
 public class WebConfig {
-	// -------------------------------- configuration couche [web]
 	
 	// injection du contexte spring 
 	@Autowired
 	private ApplicationContext context;
-
-	// définition de la servlet
+	
+	// définition de la servlet qui gère les demandes des clients. 
 	@Bean
 	public DispatcherServlet dispatcherServlet() {
 		DispatcherServlet servlet = new DispatcherServlet((WebApplicationContext) context);
+		
+		 // on demande à ce que la servlet fasse suivre à l'application les commandes HTTP [OPTIONS]
+		// servlet.setDispatchOptionsRequest( true);
+		// laisse valeur par défaut et on configure spring mvc
 		return servlet;
 	}
 
